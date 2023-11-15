@@ -16,6 +16,13 @@ public:
     ~MainWindow();
 
 private:
-    Ui::MainWindow *ui;
+    Ui::MainWindow * ui;
+    int timerId;
+
+protected:
+    void timerEvent(QTimerEvent *event);
+
+public slots:
+    void prntScr();
 };
 #endif // MAINWINDOW_H
