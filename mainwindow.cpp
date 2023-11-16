@@ -5,13 +5,10 @@
 #include <QTableWidget>
 #include <QFile>
 
-#include <iostream>
-
 namespace
 {
     static const int MILLISECONDS_IN_MINUTE = 60000;
     static const int COLUMN_COUNT = 3;
-    static const int SCALE = 160;
 }
 
 MainWindow::MainWindow(QWidget *parent)
@@ -25,6 +22,9 @@ MainWindow::MainWindow(QWidget *parent)
 
     for ( int i = 0; i < dbManager.size(); ++i )
         addRow( dbManager.getRow( i ) );
+
+    if ( dbManager.size() != 0 )
+        prevScr = QPixmap( dbManager.getRow( dbManager.size() - 1 ).path );
 
     timerId = startTimer(MILLISECONDS_IN_MINUTE);
 }
@@ -53,7 +53,8 @@ void MainWindow::prntScr()
 
     winScr.save(&file);
 
-    ScreenRow screenRow( path, "SOME_HASH", 1 );
+    float percent = imageComparator.compare( prevScr, winScr );
+    ScreenRow screenRow( path, imageComparator.getHash(), percent );
     dbManager.addRow( screenRow );
 
     addRow( screenRow, winScr );
@@ -69,7 +70,7 @@ void MainWindow::addRow( const ScreenRow& screenRow, const QPixmap& winScr )
     ui->tableWidget->insertRow( ui->tableWidget->rowCount() );
 
     QTableWidgetItem *thumbnail = new QTableWidgetItem;
-    thumbnail->setData( Qt::DecorationRole, winScr.scaled(SCALE,SCALE,Qt::IgnoreAspectRatio) );
+    thumbnail->setData( Qt::DecorationRole, winScr );
     ui->tableWidget->setItem(
             ui->tableWidget->rowCount() - 1
         ,   0

@@ -3,8 +3,6 @@
 #include <QSqlQuery>
 #include <QVariant>
 
-#include <iostream>
-
 DbManager::DbManager( const QString& path )
 {
     db = QSqlDatabase::addDatabase( "QSQLITE" );

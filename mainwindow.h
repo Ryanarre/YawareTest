@@ -4,6 +4,7 @@
 #include <QMainWindow>
 
 #include "dbmanager.h"
+#include "imagecomparator.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -31,8 +32,10 @@ private:
 private:
     Ui::MainWindow * ui;
     DbManager dbManager;
+    ImageComparator imageComparator;
+    QPixmap prevScr;
     int timerId;
 
-    int count = 0; // Temporary solution for saving img
+    int count = 0; // TODO: Temporary solution for saving img
 };
 #endif // MAINWINDOW_H

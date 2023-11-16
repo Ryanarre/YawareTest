@@ -5,6 +5,8 @@ QtApplication {
     files: [
         "dbmanager.cpp",
         "dbmanager.h",
+        "imagecomparator.cpp",
+        "imagecomparator.h",
         "main.cpp",
         "mainwindow.cpp",
         "mainwindow.h",
