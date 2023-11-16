@@ -3,6 +3,8 @@
 
 #include <QMainWindow>
 
+#include "dbmanager.h"
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -15,14 +17,22 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-private:
-    Ui::MainWindow * ui;
-    int timerId;
+public slots:
+    void prntScr();
 
 protected:
     void timerEvent(QTimerEvent *event);
 
-public slots:
-    void prntScr();
+private:
+    void addRow( const ScreenRow& screenRow );
+
+    void addRow( const ScreenRow& screenRow, const QPixmap& winScr );
+
+private:
+    Ui::MainWindow * ui;
+    DbManager dbManager;
+    int timerId;
+
+    int count = 0; // Temporary solution for saving img
 };
 #endif // MAINWINDOW_H

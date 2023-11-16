@@ -1,12 +1,15 @@
 import qbs.FileInfo
 
 QtApplication {
-    Depends { name: "Qt"; submodules: ['widgets', 'gui'] }
+    Depends { name: "Qt"; submodules: ['widgets', 'gui', 'sql'] }
     files: [
+        "dbmanager.cpp",
+        "dbmanager.h",
         "main.cpp",
         "mainwindow.cpp",
         "mainwindow.h",
         "mainwindow.ui",
+        "screenrow.h",
     ]
 
     install: true
